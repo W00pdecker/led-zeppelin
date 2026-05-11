@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://cwbchrm11okkf"]
+[gd_scene format=4 uid="uid://cwbchrm11okkf"]
 
 [ext_resource type="Texture2D" uid="uid://0556q371133g" path="res://assets/stone_packed.png" id="1_a02cp"]
 [ext_resource type="PackedScene" uid="uid://dii8ch72r86pg" path="res://Scenes/airship.tscn" id="2_go701"]
@@ -107,17 +107,17 @@ sources/0 = SubResource("TileSetAtlasSource_go701")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_go701"]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" unique_id=646103952]
 
-[node name="PlatformLayer" type="TileMapLayer" parent="."]
+[node name="PlatformLayer" type="TileMapLayer" parent="." unique_id=818147378]
 tile_map_data = PackedByteArray("AAD8/wAAAAADAAMAAAD8/wEAAAADAAQAAAD8/wIAAAADAAUAAAD9/wAAAAAEAAMAAAD9/wEAAAAEAAQAAAD9/wIAAAAEAAUAAAD+/wAAAAAFAAMAAAD+/wEAAAAFAAQAAAD+/wIAAAAFAAUAAAD//wAAAAADAAMAAAD//wEAAAADAAQAAAD//wIAAAADAAUAAAAAAAAAAAAEAAMAAAAAAAEAAAAEAAQAAAAAAAIAAAAEAAUAAAABAAAAAAAFAAMAAAABAAEAAAAFAAQAAAABAAIAAAAFAAUAAAACAAAAAAADAAMAAAACAAEAAAADAAQAAAACAAIAAAADAAUAAAADAAAAAAAEAAMAAAADAAEAAAAEAAQAAAADAAIAAAAEAAUAAAAEAAAAAAAFAAMAAAAEAAEAAAAFAAQAAAAEAAIAAAAFAAUAAAAEAPz/AAAHAAEAAAAFAPz/AAAHAAEAAAAGAPz/AAAHAAEAAAD5//z/AAAHAAEAAAD6//z/AAAHAAEAAAD7//z/AAAHAAEAAAD+//X/AAAHAAEAAAD///X/AAAHAAEAAAAAAPX/AAAHAAEAAAABAPX/AAAHAAEAAAA=")
 tile_set = SubResource("TileSet_5a7ea")
 
-[node name="Airship" parent="." instance=ExtResource("2_go701")]
+[node name="Airship" parent="." unique_id=1236214928 instance=ExtResource("2_go701")]
 position = Vector2(1, -15)
 
-[node name="BottomWall" type="StaticBody2D" parent="."]
+[node name="BottomWall" type="StaticBody2D" parent="." unique_id=1192714192]
 position = Vector2(0, 200)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall" unique_id=1322148116]
 shape = SubResource("WorldBoundaryShape2D_go701")

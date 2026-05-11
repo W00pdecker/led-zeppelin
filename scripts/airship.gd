@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
-const SPEED = 75.0
-const LIFT = -150.0  # сила подъёма при нажатии вверх
+@export var MAXSPEEDY = 400.0 # максимальная скорость вверх
+@export var MAXSPEEDX = 75.0
+@export var LIFTFORCE = 650  # сила подъёма при нажатии вверх или вниз
 const GRAVITY = 400.0  # сила гравитации
 
 var passengers_on_board: int = 0
@@ -21,12 +22,19 @@ func _physics_process(delta):
 
 	# Вверх — подъём, вниз — быстрее падаем
 	if Input.is_action_pressed("ui_up"):
-		velocity.y = LIFT
+		velocity.y -= LIFTFORCE * delta
+	if Input.is_action_pressed("ui_down"):
+		velocity.y += LIFTFORCE * delta
+	# Причешем скорость
+	if velocity.y>MAXSPEEDY:
+		velocity.y=MAXSPEEDY
+	if velocity.y< -MAXSPEEDY:
+		velocity.y= -MAXSPEEDY
 	
 	# Горизонтальное движение
 	var horizontal = Input.get_axis("ui_left", "ui_right")
 	if horizontal != 0:
-		velocity.x = horizontal * SPEED
+		velocity.x = horizontal * MAXSPEEDX
 	else:
 		velocity.x = lerp(velocity.x, 0.0, 0.1)
 
