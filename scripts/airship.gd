@@ -1,9 +1,14 @@
 extends CharacterBody2D
 
 @export var MAXSPEEDY = 400.0 # максимальная скорость вверх
-@export var MAXSPEEDX = 75.0
+@export var MAXSPEEDX = 175.0
 @export var LIFTFORCE = 650  # сила подъёма при нажатии вверх или вниз
 @export var FALL_MULTIPLIER = 0.2
+@export var ACCELERATION = 400.0
+@export var AIR_FRICTION = 2.0
+@export var BOUNCE_THRESHOLD = 10.0
+@export var WALL_BOUNCE = 0.45
+@export var FLOOR_BOUNCE = 0.5
 const GRAVITY = 400.0  # сила гравитации
 
 var passengers_on_board: int = 0
@@ -34,18 +39,35 @@ func _physics_process(delta):
 		
 	if Input.is_action_pressed("ui_down"):
 		velocity.y += LIFTFORCE * delta
-	# Причешем скорость
 	velocity.y = clamp(velocity.y, -MAXSPEEDY, MAXSPEEDY)
 	
 	# Горизонтальное движение
 	var horizontal = Input.get_axis("ui_left", "ui_right")
 	if horizontal != 0:
-		velocity.x = horizontal * MAXSPEEDX
+		velocity.x += horizontal * ACCELERATION * delta
 		animated_sprite.flip_h = horizontal > 0
 	else:
-		velocity.x = lerp(velocity.x, 0.0, 3.0 * delta)
-
+		velocity.x = lerp(velocity.x, 0.0, AIR_FRICTION * delta)
+	velocity.x = clamp(velocity.x, -MAXSPEEDX, MAXSPEEDX)
+	var previous_velocity = velocity
 	move_and_slide()
+	print(get_slide_collision_count())
+	#физика столкновений
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		var normal = collision.get_normal()
+		if abs(normal.x) > 0.7:
+			if abs(previous_velocity.x) > BOUNCE_THRESHOLD:
+				print("УДАР!")
+				velocity.x = -previous_velocity.x * WALL_BOUNCE
+			else:
+				velocity.x = 0
+		if abs(normal.y) > 0.7:
+			if abs(previous_velocity.y) > BOUNCE_THRESHOLD:
+				print("УДАР!")
+				velocity.y = -previous_velocity.y * FLOOR_BOUNCE
+			else:
+				velocity.y = 0
 
 
 func pick_up_passenger() -> bool:
