@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://cwbchrm11okkf"]
+[gd_scene load_steps=6 format=4 uid="uid://cwbchrm11okkf"]
 
 [ext_resource type="Texture2D" uid="uid://0556q371133g" path="res://assets/stone_packed.png" id="1_a02cp"]
 [ext_resource type="PackedScene" uid="uid://dii8ch72r86pg" path="res://Scenes/airship.tscn" id="2_go701"]
@@ -124,6 +124,8 @@ texture_region_size = Vector2i(17, 17)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_go701")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_go701"]
+
 [node name="World" type="Node2D"]
 
 [node name="PlatformLayer" type="TileMapLayer" parent="."]
@@ -132,3 +134,9 @@ tile_set = SubResource("TileSet_5a7ea")
 
 [node name="Airship" parent="." instance=ExtResource("2_go701")]
 position = Vector2(1, -15)
+
+[node name="BottomWall" type="StaticBody2D" parent="."]
+position = Vector2(0, 200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
+shape = SubResource("WorldBoundaryShape2D_go701")
