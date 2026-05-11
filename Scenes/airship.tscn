@@ -5,6 +5,54 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_28gfu"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_28gfu"]
+atlas = ExtResource("1_idjx2")
+region = Rect2(150, 51, 24, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hi1vk"]
+atlas = ExtResource("1_idjx2")
+region = Rect2(174, 51, 24, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bei6d"]
+atlas = ExtResource("1_idjx2")
+region = Rect2(198, 51, 24, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fmej1"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_28gfu")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_hi1vk")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_bei6d")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28gfu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hi1vk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bei6d")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hi1vk"]
 
 [node name="Airship" type="CharacterBody2D" unique_id=926220106 groups=["airship"]]
@@ -13,12 +61,9 @@ script = ExtResource("1_28gfu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1280842058]
 shape = SubResource("RectangleShape2D_28gfu")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=827974914]
-position = Vector2(-0.5, -0.5)
-scale = Vector2(0.99553573, 0.9864865)
-texture = ExtResource("1_idjx2")
-region_enabled = true
-region_rect = Rect2(151, 50.5, 23, 23.5)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=892636826]
+sprite_frames = SubResource("SpriteFrames_fmej1")
+animation = &"fly"
 
 [node name="LandingZone" type="Area2D" parent="." unique_id=2117451578]
 

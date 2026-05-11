@@ -10,6 +10,7 @@ var passengers_on_board: int = 0
 var max_passengers: int = 4
 
 @onready var landing_zone = $LandingZone
+@onready var animated_sprite = $AnimatedSprite2D
 
 
 func _ready():
@@ -27,6 +28,10 @@ func _physics_process(delta):
 	# Вверх — подъём, вниз — быстрее падаем
 	if Input.is_action_pressed("ui_up"):
 		velocity.y -= LIFTFORCE * delta
+		animated_sprite.play("fly")
+	else:
+		animated_sprite.play("idle")
+		
 	if Input.is_action_pressed("ui_down"):
 		velocity.y += LIFTFORCE * delta
 	# Причешем скорость
@@ -36,6 +41,7 @@ func _physics_process(delta):
 	var horizontal = Input.get_axis("ui_left", "ui_right")
 	if horizontal != 0:
 		velocity.x = horizontal * MAXSPEEDX
+		animated_sprite.flip_h = horizontal > 0
 	else:
 		velocity.x = lerp(velocity.x, 0.0, 3.0 * delta)
 
