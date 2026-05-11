@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var MAXSPEEDY = 400.0 # максимальная скорость вверх
 @export var MAXSPEEDX = 75.0
 @export var LIFTFORCE = 650  # сила подъёма при нажатии вверх или вниз
+@export var FALL_MULTIPLIER = 0.2
 const GRAVITY = 400.0  # сила гравитации
 
 var passengers_on_board: int = 0
@@ -18,7 +19,10 @@ func _ready():
 
 func _physics_process(delta):
 	# Гравитация всегда тянет вниз
-	velocity.y += GRAVITY * delta
+	if velocity.y > 0:
+		velocity.y += GRAVITY * delta * FALL_MULTIPLIER
+	else:
+		velocity.y += GRAVITY * delta
 
 	# Вверх — подъём, вниз — быстрее падаем
 	if Input.is_action_pressed("ui_up"):
@@ -26,17 +30,14 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_down"):
 		velocity.y += LIFTFORCE * delta
 	# Причешем скорость
-	if velocity.y>MAXSPEEDY:
-		velocity.y=MAXSPEEDY
-	if velocity.y< -MAXSPEEDY:
-		velocity.y= -MAXSPEEDY
+	velocity.y = clamp(velocity.y, -MAXSPEEDY, MAXSPEEDY)
 	
 	# Горизонтальное движение
 	var horizontal = Input.get_axis("ui_left", "ui_right")
 	if horizontal != 0:
 		velocity.x = horizontal * MAXSPEEDX
 	else:
-		velocity.x = lerp(velocity.x, 0.0, 0.1)
+		velocity.x = lerp(velocity.x, 0.0, 3.0 * delta)
 
 	move_and_slide()
 

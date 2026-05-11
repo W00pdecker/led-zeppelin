@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dii8ch72r86pg"]
+[gd_scene format=3 uid="uid://dii8ch72r86pg"]
 
 [ext_resource type="Script" uid="uid://dyu5f3v7tlytd" path="res://scripts/airship.gd" id="1_28gfu"]
 [ext_resource type="Texture2D" uid="uid://710te3l7xj4a" path="res://assets/tilemap-characters.png" id="1_idjx2"]
@@ -7,22 +7,23 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hi1vk"]
 
-[node name="Airship" type="CharacterBody2D" groups=["airship"]]
+[node name="Airship" type="CharacterBody2D" unique_id=926220106 groups=["airship"]]
 script = ExtResource("1_28gfu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1280842058]
 shape = SubResource("RectangleShape2D_28gfu")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=827974914]
 position = Vector2(-0.5, -0.5)
 scale = Vector2(0.99553573, 0.9864865)
 texture = ExtResource("1_idjx2")
 region_enabled = true
 region_rect = Rect2(151, 50.5, 23, 23.5)
 
-[node name="LandingZone" type="Area2D" parent="."]
+[node name="LandingZone" type="Area2D" parent="." unique_id=2117451578]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LandingZone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LandingZone" unique_id=741968811]
 shape = SubResource("RectangleShape2D_hi1vk")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=980844647]
+zoom = Vector2(2, 2)
