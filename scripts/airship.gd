@@ -31,14 +31,18 @@ func _physics_process(delta):
 		velocity.y += GRAVITY * delta
 
 	# Вверх — подъём, вниз — быстрее падаем
-	if Input.is_action_pressed("ui_up"):
-		velocity.y -= LIFTFORCE * delta
+	
+	if Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down"):
 		animated_sprite.play("fly")
 	else:
-		animated_sprite.play("idle")
+		animated_sprite.play("idle")		
+
+	if Input.is_action_pressed("ui_up"):
+		velocity.y -= LIFTFORCE * delta
 		
 	if Input.is_action_pressed("ui_down"):
 		velocity.y += LIFTFORCE * delta
+		
 	velocity.y = clamp(velocity.y, -MAXSPEEDY, MAXSPEEDY)
 	
 	# Горизонтальное движение
@@ -49,6 +53,7 @@ func _physics_process(delta):
 	else:
 		velocity.x = lerp(velocity.x, 0.0, AIR_FRICTION * delta)
 	velocity.x = clamp(velocity.x, -MAXSPEEDX, MAXSPEEDX)
+	
 	var previous_velocity = velocity
 	move_and_slide()
 	print(get_slide_collision_count())

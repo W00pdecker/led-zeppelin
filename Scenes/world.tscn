@@ -115,6 +115,7 @@ tile_set = SubResource("TileSet_5a7ea")
 
 [node name="Airship" parent="." unique_id=1236214928 instance=ExtResource("2_go701")]
 position = Vector2(1, -15)
+FALL_MULTIPLIER = 0.5
 
 [node name="BottomWall" type="StaticBody2D" parent="." unique_id=1192714192]
 position = Vector2(0, 200)
