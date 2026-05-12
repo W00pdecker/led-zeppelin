@@ -56,20 +56,17 @@ func _physics_process(delta):
 	
 	var previous_velocity = velocity
 	move_and_slide()
-	print(get_slide_collision_count())
 	#физика столкновений
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
 		var normal = collision.get_normal()
 		if abs(normal.x) > 0.7:
 			if abs(previous_velocity.x) > BOUNCE_THRESHOLD:
-				print("УДАР!")
 				velocity.x = -previous_velocity.x * WALL_BOUNCE
 			else:
 				velocity.x = 0
 		if abs(normal.y) > 0.7:
 			if abs(previous_velocity.y) > BOUNCE_THRESHOLD:
-				print("УДАР!")
 				velocity.y = -previous_velocity.y * FLOOR_BOUNCE
 			else:
 				velocity.y = 0

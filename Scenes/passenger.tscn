@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cvxmf7xm88c67"]
+
+[ext_resource type="Script" uid="uid://2b18ocxl1why" path="res://scripts/passenger.gd" id="1_lyrvh"]
+[ext_resource type="Texture2D" uid="uid://710te3l7xj4a" path="res://assets/tilemap-characters.png" id="2_uumvl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fr7b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qpig"]
+atlas = ExtResource("2_uumvl")
+region = Rect2(0, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aj4wi"]
+atlas = ExtResource("2_uumvl")
+region = Rect2(25, 0, 25, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3mxvk"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qpig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aj4wi")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Passenger" type="Area2D" unique_id=1744424632]
+script = ExtResource("1_lyrvh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2000388252]
+shape = SubResource("RectangleShape2D_1fr7b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1385835891]
+sprite_frames = SubResource("SpriteFrames_3mxvk")
+animation = &"idle"
+frame_progress = 0.031300478
