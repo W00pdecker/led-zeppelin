@@ -22,7 +22,7 @@ animations = [{
 "frames": [],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 0.5,
@@ -33,10 +33,13 @@ animations = [{
 }, {
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_bei6d")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_hi1vk")
 }],
 "loop": true,
 "name": &"fly",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -47,10 +50,13 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bei6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hi1vk")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 6.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hi1vk"]
@@ -64,6 +70,7 @@ shape = SubResource("RectangleShape2D_28gfu")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=892636826]
 sprite_frames = SubResource("SpriteFrames_fmej1")
 animation = &"fly"
+frame_progress = 0.82190704
 
 [node name="LandingZone" type="Area2D" parent="." unique_id=2117451578]
 
@@ -71,4 +78,6 @@ animation = &"fly"
 shape = SubResource("RectangleShape2D_hi1vk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=980844647]
+visible = false
+enabled = false
 zoom = Vector2(2, 2)
