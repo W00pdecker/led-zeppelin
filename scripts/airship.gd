@@ -104,3 +104,6 @@ func _on_landing_zone_area_entered(area):
 func _on_landing_zone_area_exited(area):
 	if area.is_in_group("passenger") and not area.get_parent().is_boarding:
 		passengers_in_zone.erase(area.get_parent())
+	if area.is_in_group("passenger") and area.get_parent().is_boarding:
+		passengers_in_zone.erase(area.get_parent())
+		area.get_parent().is_boarding = false

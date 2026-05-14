@@ -26,10 +26,10 @@ func _physics_process(delta):
 		
 		if direction.x > 0:
 			velocity.x = BOARD_SPEED
-			animated_sprite.flip_h = false
+			animated_sprite.flip_h = true
 		elif direction.x < 0:
 			velocity.x = -BOARD_SPEED
-			animated_sprite.flip_h = true
+			animated_sprite.flip_h = false
 		
 		animated_sprite.play("walk")
 		
