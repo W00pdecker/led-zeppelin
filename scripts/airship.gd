@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+#Константы физики
 @export var MAXSPEEDY = 400.0 # максимальная скорость вверх
 @export var MAXSPEEDX = 175.0
 @export var LIFTFORCE = 650  # сила подъёма при нажатии вверх или вниз
@@ -11,16 +12,18 @@ extends CharacterBody2D
 @export var FLOOR_BOUNCE = 0.5
 const GRAVITY = 400.0  # сила гравитации
 
+#Константы пассажиров или, ну я не знаю, всякие константы
 var passengers_on_board: int = 0
 var max_passengers: int = 4
+var passengers_in_zone: Array = []
 
 @onready var landing_zone = $LandingZone
 @onready var animated_sprite = $AnimatedSprite2D
 
 
 func _ready():
-	landing_zone.body_entered.connect(_on_landing_zone_entered)
-	landing_zone.body_exited.connect(_on_landing_zone_exited)
+	landing_zone.area_entered.connect(_on_landing_zone_area_entered)
+	landing_zone.area_exited.connect(_on_landing_zone_area_exited)
 
 
 func _physics_process(delta):
@@ -70,7 +73,14 @@ func _physics_process(delta):
 				velocity.y = -previous_velocity.y * FLOOR_BOUNCE
 			else:
 				velocity.y = 0
-
+	
+	# Проверяем подбор пассажиров каждый кадр
+	print("on_floor: ", is_on_floor(), " | in_zone: ", passengers_in_zone.size())
+	if is_on_floor() and passengers_in_zone.size() > 0:
+		print("ready for boarding")
+	for passenger in passengers_in_zone.duplicate():
+			if is_instance_valid(passenger) and not passenger.is_boarding:
+				passenger.start_boarding(self)
 
 func pick_up_passenger() -> bool:
 	if passengers_on_board < max_passengers:
@@ -87,9 +97,10 @@ func deliver_passengers():
 		print("Пассажиры доставлены!")
 
 
-func _on_landing_zone_entered(body):
-	pass
+func _on_landing_zone_area_entered(area):
+	if area.is_in_group("Passenger"):
+		passengers_in_zone.append(area)
 
-
-func _on_landing_zone_exited(body):
-	pass
+func _on_landing_zone_area_exited(area):
+	if area.is_in_group("Passenger") and not area.is_boarding:
+		passengers_in_zone.erase(area)
