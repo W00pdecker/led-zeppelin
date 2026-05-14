@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://2b18ocxl1why" path="res://scripts/passenger.gd" id="1_lyrvh"]
 [ext_resource type="Texture2D" uid="uid://710te3l7xj4a" path="res://assets/tilemap-characters.png" id="2_uumvl"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fr7b"]
-size = Vector2(32, 33)
+[sub_resource type="CircleShape2D" id="CircleShape2D_lyrvh"]
+radius = 12.0415945
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3qpig"]
 atlas = ExtResource("2_uumvl")
@@ -52,15 +52,22 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Passenger" type="Area2D" unique_id=1744424632 groups=["Passenger"]]
-script = ExtResource("1_lyrvh")
-BOARD_DISTANCE = 5.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fr7b"]
+size = Vector2(32, 33)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2000388252]
-position = Vector2(1, 0.5)
-shape = SubResource("RectangleShape2D_1fr7b")
+[node name="Passenger" type="CharacterBody2D" unique_id=1726474580 groups=["passenger"]]
+script = ExtResource("1_lyrvh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=804357638]
+shape = SubResource("CircleShape2D_lyrvh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1385835891]
 sprite_frames = SubResource("SpriteFrames_3mxvk")
 animation = &"walk"
-frame_progress = 0.015554443
+frame_progress = 0.3136654
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1035109560 groups=["passenger"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=2000388252]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_1fr7b")

@@ -10,7 +10,7 @@ extends CharacterBody2D
 @export var BOUNCE_THRESHOLD = 10.0
 @export var WALL_BOUNCE = 0.45
 @export var FLOOR_BOUNCE = 0.5
-const GRAVITY = 400.0  # сила гравитации
+@export var GRAVITY = 400.0  # сила гравитации
 
 #Константы пассажиров или, ну я не знаю, всякие константы
 var passengers_on_board: int = 0
@@ -98,9 +98,9 @@ func deliver_passengers():
 
 
 func _on_landing_zone_area_entered(area):
-	if area.is_in_group("Passenger"):
-		passengers_in_zone.append(area)
+	if area.is_in_group("passenger"):
+		passengers_in_zone.append(area.get_parent())
 
 func _on_landing_zone_area_exited(area):
-	if area.is_in_group("Passenger") and not area.is_boarding:
-		passengers_in_zone.erase(area)
+	if area.is_in_group("passenger") and not area.get_parent().is_boarding:
+		passengers_in_zone.erase(area.get_parent())
