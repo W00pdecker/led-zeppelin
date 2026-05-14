@@ -1,16 +1,6 @@
 extends Node2D
 
-@onready var levels = {
-	0: $Level0,
-	1: $Level1,
-	2: $Level2,
-	3: $Level3,
-}
-
 func _ready():
-	for level in levels.values():
-		_hide_level(level)
-	_show_level(levels[0])
 		
 
 	GameManager.passenger_collected.connect(_on_passenger_collected)
@@ -25,10 +15,7 @@ func _process(delta):
 		$Airship/Camera2D.enabled = false
 
 func _on_passenger_collected(total: int):
-	if levels.has(total):
-		_show_level(levels[total])
-		_hide_level(levels[total-1])
-		print("Открылась новая платформа!")
+	pass
 
 
 func _hide_level(level: Node2D):

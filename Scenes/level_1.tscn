@@ -11,3 +11,4 @@ tile_set = ExtResource("1_8ffim")
 
 [node name="Passenger" parent="." unique_id=1744424632 instance=ExtResource("2_xfk5q")]
 position = Vector2(96, 72)
+BOARD_DISTANCE = 30.0

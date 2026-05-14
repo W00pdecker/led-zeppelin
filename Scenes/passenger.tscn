@@ -64,7 +64,7 @@ shape = SubResource("CircleShape2D_lyrvh")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1385835891]
 sprite_frames = SubResource("SpriteFrames_3mxvk")
 animation = &"walk"
-frame_progress = 0.3136654
+frame_progress = 0.82270265
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=1035109560 groups=["passenger"]]
 

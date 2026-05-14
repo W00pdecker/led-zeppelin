@@ -6,7 +6,7 @@ var airship: Node2D = null
 
 @export var GRAVITY = 400.0
 @export var BOARD_SPEED = 60.0
-@export var BOARD_DISTANCE = 5.0
+@export var BOARD_DISTANCE = 20.0
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var detection_area = $DetectionArea
