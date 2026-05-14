@@ -12,9 +12,11 @@
 [node name="World" type="Node2D" unique_id=646103952]
 script = ExtResource("1_8j60k")
 
+[node name="LevelCamera" type="Camera2D" parent="." unique_id=1367514767]
+zoom = Vector2(2, 2)
+
 [node name="Airship" parent="." unique_id=1236214928 instance=ExtResource("2_go701")]
 position = Vector2(-8, 40)
-FALL_MULTIPLIER = 0.5
 
 [node name="BottomWall" type="StaticBody2D" parent="." unique_id=1192714192]
 

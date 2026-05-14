@@ -65,6 +65,8 @@ size = Vector2(80, 19)
 
 [node name="Airship" type="CharacterBody2D" unique_id=926220106 groups=["airship"]]
 script = ExtResource("1_28gfu")
+LIFTFORCE = 675
+FALL_MULTIPLIER = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1280842058]
 shape = SubResource("CircleShape2D_28gfu")
@@ -81,4 +83,5 @@ position = Vector2(-1, 0.5)
 shape = SubResource("RectangleShape2D_hi1vk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=980844647]
-zoom = Vector2(2, 2)
+enabled = false
+zoom = Vector2(4, 4)
