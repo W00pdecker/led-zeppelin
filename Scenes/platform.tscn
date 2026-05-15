@@ -2,14 +2,7 @@
 
 [ext_resource type="Script" uid="uid://vpp5reh054ah" path="res://scripts/platform.gd" id="1_1rc8e"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1rc8e"]
-size = Vector2(132, 20)
-
 [node name="platform" type="Area2D" unique_id=569296641]
 collision_layer = 4
 input_pickable = false
 script = ExtResource("1_1rc8e")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=884302842]
-position = Vector2(-1, 1)
-shape = SubResource("RectangleShape2D_1rc8e")

@@ -4,6 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://cvxmf7xm88c67" path="res://Scenes/passenger.tscn" id="2_31js7"]
 [ext_resource type="PackedScene" uid="uid://b0ry2kfxdlalq" path="res://Scenes/platform.tscn" id="4_epnel"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_finow"]
+size = Vector2(224, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epnel"]
+size = Vector2(252, 20)
+
 [node name="Level0" type="Node2D" unique_id=1584254276]
 position = Vector2(-162, -159)
 
@@ -25,5 +31,13 @@ position = Vector2(32, 224)
 [node name="platform" parent="Platforms" unique_id=569296641 instance=ExtResource("4_epnel")]
 position = Vector2(13, 76)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/platform" unique_id=920283980]
+position = Vector2(-45, 3)
+shape = SubResource("RectangleShape2D_finow")
+
 [node name="platform2" parent="Platforms" unique_id=1452866969 instance=ExtResource("4_epnel")]
 position = Vector2(82, -95)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/platform2" unique_id=1974813249]
+position = Vector2(-68, 0)
+shape = SubResource("RectangleShape2D_epnel")
