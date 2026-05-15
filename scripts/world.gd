@@ -2,14 +2,12 @@ extends Node2D
 
 func _ready():
 		
-
 	GameManager.passenger_collected.connect(_on_passenger_collected)
 
 func _process(delta):
 	if Input.is_action_pressed("zoom"):
 		$Airship/Camera2D.enabled = true
 		$LevelCamera.enabled = false
-		print("Нажал, радуйся")
 	else:
 		$LevelCamera.enabled = true
 		$Airship/Camera2D.enabled = false

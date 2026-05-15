@@ -50,7 +50,7 @@ func _physics_process(delta):
 	
 	# Горизонтальное движение
 	var horizontal = Input.get_axis("ui_left", "ui_right")
-	if horizontal != 0:
+	if horizontal != 0 and not is_on_floor():
 		velocity.x += horizontal * ACCELERATION * delta
 		animated_sprite.flip_h = horizontal > 0
 	else:
@@ -76,7 +76,13 @@ func _physics_process(delta):
 	
 	# Проверяем подбор пассажиров каждый кадр
 	print("on_floor: ", is_on_floor(), " | in_zone: ", passengers_in_zone.size())
-	if is_on_floor() and passengers_in_zone.size() > 0:
+	#if is_on_floor() and passengers_in_zone.size() > 0:
+			#print("ready for boarding")
+	#for passenger in passengers_in_zone.duplicate():
+			#if is_instance_valid(passenger) and not passenger.is_boarding:
+				#passenger.start_boarding(self)
+	
+	if is_on_floor() and $GroundCheck.is_colliding():
 		print("ready for boarding")
 	for passenger in passengers_in_zone.duplicate():
 			if is_instance_valid(passenger) and not passenger.is_boarding:

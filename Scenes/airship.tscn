@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dyu5f3v7tlytd" path="res://scripts/airship.gd" id="1_28gfu"]
 [ext_resource type="Texture2D" uid="uid://710te3l7xj4a" path="res://assets/tilemap-characters.png" id="1_idjx2"]
+[ext_resource type="Script" uid="uid://4in3kcvnd1l8" path="res://scripts/ground_check_player.gd" id="3_hi1vk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_28gfu"]
-radius = 7.071068
+radius = 8.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_28gfu"]
 atlas = ExtResource("1_idjx2")
@@ -61,7 +62,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hi1vk"]
-size = Vector2(80, 19)
+size = Vector2(640, 16)
 
 [node name="Airship" type="CharacterBody2D" unique_id=926220106 groups=["airship"]]
 script = ExtResource("1_28gfu")
@@ -79,8 +80,14 @@ frame_progress = 0.82190704
 [node name="LandingZone" type="Area2D" parent="." unique_id=2117451578]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LandingZone" unique_id=741968811]
-position = Vector2(-1, 0.5)
 shape = SubResource("RectangleShape2D_hi1vk")
+
+[node name="GroundCheck" type="RayCast2D" parent="." unique_id=889723016]
+target_position = Vector2(0, 16)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("3_hi1vk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=980844647]
 enabled = false

@@ -3,6 +3,7 @@ extends CharacterBody2D
 var is_collected: bool = false
 var is_boarding: bool = false
 var airship: Node2D = null
+var lobotomized = true
 
 @export var GRAVITY = 400.0
 @export var BOARD_SPEED = 60.0
@@ -18,9 +19,10 @@ func _ready():
 
 func _physics_process(delta):
 	# Гравитация
+	print ("Я лоботомит: ", lobotomized)
 	velocity.y += GRAVITY * delta
 
-	if is_boarding and airship != null:
+	if not lobotomized and is_boarding and airship != null:
 		# Двигаемся к кораблю по земле
 		var direction = airship.global_position - global_position
 		

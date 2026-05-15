@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dnvixr70nlro7" path="res://scripts/world.gd" id="1_8j60k"]
 [ext_resource type="PackedScene" uid="uid://dii8ch72r86pg" path="res://Scenes/airship.tscn" id="2_go701"]
-[ext_resource type="PackedScene" uid="uid://c3tb8pfangvt1" path="res://Scenes/level_0.tscn" id="3_fo5ed"]
+[ext_resource type="PackedScene" uid="uid://c3tb8pfangvt1" path="res://Levels/level_0.tscn" id="3_fo5ed"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_go701"]
 
@@ -13,12 +13,12 @@ script = ExtResource("1_8j60k")
 zoom = Vector2(2, 2)
 
 [node name="Airship" parent="." unique_id=1236214928 instance=ExtResource("2_go701")]
-position = Vector2(-8, 40)
+position = Vector2(-24, -24)
 
-[node name="BottomWall" type="StaticBody2D" parent="." unique_id=1192714192]
+[node name="Walls" type="StaticBody2D" parent="." unique_id=1192714192]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall" unique_id=1322148116]
-position = Vector2(0, 128)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls" unique_id=1322148116]
+position = Vector2(0, 160)
 shape = SubResource("WorldBoundaryShape2D_go701")
 
 [node name="Level0" parent="." unique_id=1584254276 instance=ExtResource("3_fo5ed")]
