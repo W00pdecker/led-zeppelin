@@ -1,7 +1,6 @@
 extends Node2D
 
-func _ready():
-		
+func _ready():		
 	GameManager.passenger_collected.connect(_on_passenger_collected)
 
 func _process(delta):

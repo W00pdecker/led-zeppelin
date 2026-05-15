@@ -13,13 +13,13 @@ script = ExtResource("1_8j60k")
 zoom = Vector2(2, 2)
 
 [node name="Airship" parent="." unique_id=1236214928 instance=ExtResource("2_go701")]
-position = Vector2(-24, -24)
+position = Vector2(-108, -33)
 
 [node name="Walls" type="StaticBody2D" parent="." unique_id=1192714192]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls" unique_id=1322148116]
+[node name="Collision" type="CollisionShape2D" parent="Walls" unique_id=1322148116]
 position = Vector2(0, 160)
 shape = SubResource("WorldBoundaryShape2D_go701")
 
 [node name="Level0" parent="." unique_id=1584254276 instance=ExtResource("3_fo5ed")]
-position = Vector2(-160, -160)
+position = Vector2(-159, -159)

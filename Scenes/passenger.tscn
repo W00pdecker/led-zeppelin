@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://2b18ocxl1why" path="res://scripts/passenger.gd" id="1_lyrvh"]
 [ext_resource type="Texture2D" uid="uid://710te3l7xj4a" path="res://assets/tilemap-characters.png" id="2_uumvl"]
-[ext_resource type="Script" uid="uid://cioco71ytrtax" path="res://scripts/ground_check_mob.gd" id="3_uumvl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lyrvh"]
 radius = 8.0
@@ -53,8 +52,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fr7b"]
-size = Vector2(32, 33)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lyrvh"]
+size = Vector2(11, 5.5)
 
 [node name="Passenger" type="CharacterBody2D" unique_id=1726474580 groups=["passenger"]]
 script = ExtResource("1_lyrvh")
@@ -68,14 +67,10 @@ sprite_frames = SubResource("SpriteFrames_3mxvk")
 animation = &"walk"
 frame_progress = 0.69389373
 
-[node name="DetectionArea" type="Area2D" parent="." unique_id=1035109560 groups=["passenger"]]
+[node name="PlatformDetector" type="Area2D" parent="." unique_id=1336127547]
+collision_layer = 0
+collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=2000388252]
-shape = SubResource("RectangleShape2D_1fr7b")
-
-[node name="GroundCheck" type="RayCast2D" parent="." unique_id=161758941]
-target_position = Vector2(0, 16)
-collision_mask = 2
-collide_with_areas = true
-collide_with_bodies = false
-script = ExtResource("3_uumvl")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformDetector" unique_id=1618090661]
+position = Vector2(0.5, 9.25)
+shape = SubResource("RectangleShape2D_lyrvh")
