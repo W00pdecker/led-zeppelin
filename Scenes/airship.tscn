@@ -28,6 +28,14 @@ animations = [{
 "frames": [{
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_28gfu")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_28gfu")
 }, {
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_hi1vk")
@@ -73,8 +81,7 @@ shape = SubResource("CircleShape2D_28gfu")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=892636826]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_fmej1")
-animation = &"fly"
-frame_progress = 0.82190704
+animation = &"fall"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=980844647]
 enabled = false

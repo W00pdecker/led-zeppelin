@@ -34,6 +34,8 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("ui_down"):
 		velocity.y += LIFTFORCE * delta
+		if not is_on_floor():
+			animated_sprite.play("fall")
 
 	velocity.y = clamp(velocity.y, -MAXSPEEDY, MAXSPEEDY)
 

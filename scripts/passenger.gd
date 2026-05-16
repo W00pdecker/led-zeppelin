@@ -47,14 +47,6 @@ func _physics_process(delta):
 		animated_sprite.play("idle")
 	move_and_slide()
 
-
-func try_start_boarding(target: Node2D):
-	if is_collected or is_boarding:
-		return
-	if target == null:
-		return
-	start_boarding(target)
-
 func start_boarding(target: Node2D):
 
 	if is_collected or is_boarding:

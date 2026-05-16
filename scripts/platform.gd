@@ -12,7 +12,7 @@ func _ready():
 func _notify_passengers_ship_arrived(ship):
 	for body in get_overlapping_bodies():
 		if body.is_in_group("passenger"):
-			body.try_start_boarding(ship)
+			body.start_boarding(ship)
 
 func _notify_passengers_ship_left():
 	for body in get_overlapping_bodies():
