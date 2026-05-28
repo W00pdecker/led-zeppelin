@@ -2,6 +2,10 @@
 
 [ext_resource type="TileSet" uid="uid://ctdf1ujr8qn7u" path="res://assets/TileSets/new_tile_set.tres" id="1_8ffim"]
 [ext_resource type="PackedScene" uid="uid://cvxmf7xm88c67" path="res://Scenes/passenger.tscn" id="2_xfk5q"]
+[ext_resource type="PackedScene" uid="uid://b0ry2kfxdlalq" path="res://Scenes/platform.tscn" id="3_3mhv4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rf6l5"]
+size = Vector2(224, 16)
 
 [node name="Level1" type="Node2D" unique_id=2127914116]
 
@@ -11,4 +15,14 @@ tile_set = ExtResource("1_8ffim")
 
 [node name="Passenger" parent="." unique_id=1744424632 instance=ExtResource("2_xfk5q")]
 position = Vector2(96, 72)
-BOARD_DISTANCE = 30.0
+
+[node name="Start" type="Marker2D" parent="." unique_id=1398946562]
+position = Vector2(50, 272)
+
+[node name="Node" type="Node" parent="." unique_id=865067365]
+
+[node name="platform" parent="Node" unique_id=569296641 instance=ExtResource("3_3mhv4")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/platform" unique_id=695587330]
+position = Vector2(144, 96)
+shape = SubResource("RectangleShape2D_rf6l5")
