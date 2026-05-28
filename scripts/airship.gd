@@ -139,7 +139,7 @@ func _check_docking(delta):
 	var stable : bool = (
 		is_on_floor()
 		and abs(velocity.x) < 5
-		and abs(velocity.y) < 5
+		#and abs(velocity.y) < 5
 	)
 
 	if stable:
