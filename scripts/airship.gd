@@ -6,12 +6,13 @@ extends CharacterBody2D
 @export var LIFTFORCE = 650
 @export var FALL_MULTIPLIER = 0.2
 @export var ACCELERATION = 400.0
-@export var AIR_FRICTION = 2.0
+@export var AIR_FRICTION = 1.0
+@export var GROUND_FRICTION = 8.0
 @export var BOUNCE_THRESHOLD = 10.0
 @export var WALL_BOUNCE = 0.45
 @export var FLOOR_BOUNCE = 0.5
 @export var GRAVITY = 400.0
-@export var DOCK_TIME = 0.5
+@export var DOCK_TIME = 0.2
 
 var passengers_on_board: int = 0
 var max_passengers: int = 4
@@ -72,11 +73,17 @@ func _physics_process(delta):
 		animated_sprite.flip_h = horizontal > 0
 
 	else:
-
-		velocity.x = lerp(
+		if not (is_on_floor() or is_on_ceiling()):
+			velocity.x = lerp(
+				velocity.x,
+				0.0,
+				AIR_FRICTION * delta
+			)
+		else:
+			velocity.x = lerp(
 			velocity.x,
 			0.0,
-			AIR_FRICTION * delta
+			GROUND_FRICTION * delta
 		)
 
 	velocity.x = clamp(
