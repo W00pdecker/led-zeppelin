@@ -1,90 +1,160 @@
+class_name Passenger
 extends CharacterBody2D
+
+enum State {
+	WAITING,
+	BOARDING
+}
 
 @export var GRAVITY = 400.0
 @export var BOARD_SPEED = 60.0
 @export var MAX_FALL_SPEED = 500.0
 
 @onready var animated_sprite = $AnimatedSprite2D
-@onready var platform_detector = $PlatformDetector
+@onready var station_detector = $PlatformDetector
 
-var is_collected: bool = false
-var is_boarding: bool = false
-var airship: Node2D = null
-var current_platform: Area2D = null
+var state = State.WAITING
+
+var station = null
+var airship = null
+
 
 func _ready():
 
-	animated_sprite.play("idle")
-	platform_detector.area_entered.connect(_on_platform_entered)
-	platform_detector.area_exited.connect(_on_platform_exited)
+	station_detector.area_entered.connect(
+		_on_station_entered
+	)
+
+	station_detector.area_exited.connect(
+		_on_station_exited
+	)
 
 
 func _physics_process(delta):
 
 	velocity.y += GRAVITY * delta
-	velocity.y = clamp(velocity.y, -MAX_FALL_SPEED, MAX_FALL_SPEED)
 
-	# движение к кораблю
-	if is_boarding and airship != null:
+	velocity.y = clamp(
+		velocity.y,
+		-MAX_FALL_SPEED,
+		MAX_FALL_SPEED
+	)
 
-		var direction = airship.global_position - global_position
+	match state:
 
-		if direction.x > 0:
-			velocity.x = BOARD_SPEED
-			animated_sprite.flip_h = true
+		State.WAITING:
 
-		elif direction.x < 0:
-			velocity.x = -BOARD_SPEED
-			animated_sprite.flip_h = false
-
-		else:
 			velocity.x = 0
+			animated_sprite.play("idle")
 
-		animated_sprite.play("walk")
-		
-	else:
-		velocity.x = 0
-		animated_sprite.play("idle")
+		State.BOARDING:
+
+			if airship == null:
+
+				stop_boarding()
+
+			else:
+
+				var direction = sign(
+					airship.global_position.x
+					- global_position.x
+				)
+
+				velocity.x = direction * BOARD_SPEED
+
+				if direction > 0:
+					animated_sprite.flip_h = true
+
+				elif direction < 0:
+					animated_sprite.flip_h = false
+
+				animated_sprite.play("walk")
+
 	move_and_slide()
 
-func start_boarding(target: Node2D):
 
-	if is_collected or is_boarding:
+func start_boarding(ship):
+
+	if state != State.WAITING:
 		return
 
-	if target == null:
-		return
+	airship = ship
+	state = State.BOARDING
 
-	is_boarding = true
-	airship = target
-	
+
 func stop_boarding():
-	is_boarding = false
+
 	airship = null
+	state = State.WAITING
+
 
 func collect() -> bool:
-
-	if is_collected:
-		return false
 
 	if airship == null:
 		return false
 
 	if airship.pick_up_passenger():
-		is_collected = true
+
 		GameManager.on_passenger_collected()
+
 		queue_free()
+
 		return true
 
 	return false
 
 
-func _on_platform_entered(area):
+func _on_station_entered(area):
+	
+	if not area.is_in_group("Station"):
+		return
+	print("ENTERED STATION")
+	station = area
 
-	current_platform = area
+	station.ship_arrived.connect(
+		_on_ship_arrived
+	)
+
+	station.ship_departed.connect(
+		_on_ship_departed
+	)
+
+	if station.has_ship():
+
+		start_boarding(
+			station.docked_ship
+		)
 
 
-func _on_platform_exited(area):
+func _on_station_exited(area):
 
-	if current_platform == area:
-		current_platform = null
+	if area != station:
+		return
+
+	if station.ship_arrived.is_connected(
+		_on_ship_arrived
+	):
+		station.ship_arrived.disconnect(
+			_on_ship_arrived
+		)
+
+	if station.ship_departed.is_connected(
+		_on_ship_departed
+	):
+		station.ship_departed.disconnect(
+			_on_ship_departed
+		)
+
+	stop_boarding()
+
+	station = null
+
+
+func _on_ship_arrived(ship):
+	print("PASSENGER START BOARDING")
+	start_boarding(ship)
+
+
+func _on_ship_departed():
+
+	stop_boarding()

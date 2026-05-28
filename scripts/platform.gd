@@ -1,37 +1,35 @@
+class_name Station
 extends Area2D
 
-var ship_present: bool = false
-var current_airship: Node2D = null
+signal ship_arrived(ship)
+signal ship_departed()
+
+var docked_ship = null
 
 
-func _ready():
-
-	body_entered.connect(_on_body_entered)
-	body_exited.connect(_on_body_exited)
-
-func _notify_passengers_ship_arrived(ship):
-	for body in get_overlapping_bodies():
-		if body.is_in_group("passenger"):
-			body.start_boarding(ship)
-
-func _notify_passengers_ship_left():
-	for body in get_overlapping_bodies():
-		if body.is_in_group("passenger"):
-			body.stop_boarding()
-
-func _on_body_entered(body):
-
-	if body.is_in_group("airship"):
-
-		ship_present = true
-		current_airship = body
-		_notify_passengers_ship_arrived(body)
+func has_ship() -> bool:
+	return docked_ship != null
 
 
-func _on_body_exited(body):
+func ship_arrived_at_station(ship):
 
-	if body.is_in_group("airship"):
+	if docked_ship == ship:
+		return
 
-		ship_present = false
-		current_airship = null
-		_notify_passengers_ship_left()
+	docked_ship = ship
+
+	print("SHIP ARRIVED")
+
+	ship_arrived.emit(ship)
+
+
+func ship_departed_from_station(ship):
+
+	if docked_ship != ship:
+		return
+
+	docked_ship = null
+
+	print("SHIP DEPARTED")
+
+	ship_departed.emit()

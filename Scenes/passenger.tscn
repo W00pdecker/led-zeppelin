@@ -67,7 +67,7 @@ sprite_frames = SubResource("SpriteFrames_3mxvk")
 animation = &"walk"
 frame_progress = 0.69389373
 
-[node name="PlatformDetector" type="Area2D" parent="." unique_id=1336127547]
+[node name="PlatformDetector" type="Area2D" parent="." unique_id=1336127547 groups=["passenger"]]
 collision_layer = 0
 collision_mask = 4
 
