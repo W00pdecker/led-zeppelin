@@ -1,7 +1,22 @@
 extends Node2D
 
+var current_level_instance: Node = null
+
 func _ready():		
-	GameManager.passenger_collected.connect(_on_passenger_collected)
+	load_level(GameManager.current_level_path)
+	var spawn = current_level_instance.get_node("Start")
+	$Airship.global_position = spawn.global_position
+	GameManager.passenger_collected.connect(
+		_on_passenger_collected
+	)
+	
+func load_level(level_path: String):
+
+	if current_level_instance:
+		current_level_instance.queue_free()
+	var packed_scene = load(level_path)
+	current_level_instance = packed_scene.instantiate()
+	$CurrentLevel.add_child(current_level_instance)
 
 func _process(delta):
 	if Input.is_action_pressed("zoom"):

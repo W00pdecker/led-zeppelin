@@ -39,4 +39,13 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Start game"
 
-[connection signal="pressed" from="CanvasLayer/Control/Button" to="." method="_on_button_pressed"]
+[node name="LevelSelect" type="Button" parent="CanvasLayer/Control" unique_id=1364720395]
+layout_mode = 0
+offset_left = 274.0
+offset_top = 344.0
+offset_right = 370.0
+offset_bottom = 382.0
+text = "Level select"
+
+[connection signal="pressed" from="CanvasLayer/Control/Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/LevelSelect" to="." method="_on_level_select_button_pressed"]

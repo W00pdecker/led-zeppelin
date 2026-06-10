@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dnvixr70nlro7" path="res://scripts/world.gd" id="1_8j60k"]
 [ext_resource type="PackedScene" uid="uid://dii8ch72r86pg" path="res://Scenes/airship.tscn" id="2_go701"]
-[ext_resource type="PackedScene" uid="uid://c3tb8pfangvt1" path="res://Levels/level_0.tscn" id="3_fo5ed"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_go701"]
 
@@ -21,5 +20,4 @@ position = Vector2(-108, -33)
 position = Vector2(0, 160)
 shape = SubResource("WorldBoundaryShape2D_go701")
 
-[node name="Level0" parent="." unique_id=1584254276 instance=ExtResource("3_fo5ed")]
-position = Vector2(-159, -159)
+[node name="CurrentLevel" type="Node2D" parent="." unique_id=1063297746]

@@ -34,6 +34,14 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hi1vk")
+}],
+"loop": true,
+"name": &"float",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_28gfu")
 }, {
@@ -84,7 +92,8 @@ shape = SubResource("CircleShape2D_28gfu")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=892636826]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_fmej1")
-animation = &"fall"
+animation = &"float"
+frame_progress = 0.29166982
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=980844647]
 enabled = false

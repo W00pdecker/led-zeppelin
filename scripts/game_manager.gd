@@ -8,6 +8,7 @@ var score: int = 0
 var passengers_delivered: int = 0
 var passengers_collected: int = 0  # новая переменная
 var level_target: int = 10
+var current_level_path := ""
 
 
 func on_passenger_collected():

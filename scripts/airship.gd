@@ -85,6 +85,7 @@ func _physics_process(delta):
 			0.0,
 			GROUND_FRICTION * delta
 		)
+			animated_sprite.play("float")
 
 	velocity.x = clamp(
 		velocity.x,
