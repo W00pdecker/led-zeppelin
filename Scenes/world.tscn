@@ -25,4 +25,5 @@ shape = SubResource("WorldBoundaryShape2D_go701")
 [node name="CurrentLevel" type="Node2D" parent="." unique_id=1063297746]
 
 [node name="LevelSelect" parent="." unique_id=828623624 instance=ExtResource("3_5a7ea")]
-position = Vector2(-160, -159)
+position = Vector2(-158, -155)
+scale = Vector2(0.5372687, 0.6240248)
