@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://wmq0dc0oweli" path="res://scripts/level_select.gd" id="1_1fiak"]
 
 [node name="Level select" type="Node2D" unique_id=828623624]
+process_mode = 2
 position = Vector2(0, 8)
 script = ExtResource("1_1fiak")
 

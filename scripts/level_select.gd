@@ -2,11 +2,15 @@ extends Node2D
 
 @onready var levels_container = $Control/MarginContainer/VBoxContainer
 
+signal level_selected(level_path)
+signal back_pressed
+
 func _ready():
 	load_levels()
 
 func load_levels():
 	var level_files: Array[String] = []
+	
 	
 	var dir = DirAccess.open("res://Levels")
 	if dir == null:
@@ -32,23 +36,15 @@ func create_level_button(level_file: String):
 	var button = Button.new()
 	button.text = level_file.get_basename()
 	button.pressed.connect(
-		func():
-			start_level(level_file)
-	)
+	func():
+		level_selected.emit(
+			"res://Levels/" + level_file
+		)
+		print("pressed button " + level_file)
+)
 	levels_container.add_child(button)
-	
-func start_level(level_file: String):
-
-	GameManager.current_level_path = (
-		"res://Levels/" + level_file
-	)
-
-	get_tree().change_scene_to_file(
-		"res://Scenes/world.tscn"
-	)
 	
 func _on_back_button_pressed():
 
-	get_tree().change_scene_to_file(
-		"res://Scenes/main.tscn"
-	)
+	back_pressed.emit()
+	print("pressed button back")

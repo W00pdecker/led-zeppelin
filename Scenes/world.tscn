@@ -2,10 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dnvixr70nlro7" path="res://scripts/world.gd" id="1_8j60k"]
 [ext_resource type="PackedScene" uid="uid://dii8ch72r86pg" path="res://Scenes/airship.tscn" id="2_go701"]
+[ext_resource type="PackedScene" uid="uid://cafrabyf0nogv" path="res://Scenes/level_select.tscn" id="3_5a7ea"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_go701"]
 
 [node name="World" type="Node2D" unique_id=646103952]
+process_mode = 1
 script = ExtResource("1_8j60k")
 
 [node name="LevelCamera" type="Camera2D" parent="." unique_id=1367514767]
@@ -21,3 +23,6 @@ position = Vector2(0, 160)
 shape = SubResource("WorldBoundaryShape2D_go701")
 
 [node name="CurrentLevel" type="Node2D" parent="." unique_id=1063297746]
+
+[node name="LevelSelect" parent="." unique_id=828623624 instance=ExtResource("3_5a7ea")]
+position = Vector2(-160, -159)
